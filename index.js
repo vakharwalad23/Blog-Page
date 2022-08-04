@@ -2,6 +2,9 @@ const express = require('express')
 const app = new express()
 const path = require('path')
 const ejs = require('ejs')
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://localhost:27017/Blogger',{useNewUrlParser:true})
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
