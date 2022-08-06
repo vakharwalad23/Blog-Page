@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%-include('layouts/header');-%>
+    <body>
+        <!-- Navigation-->
+        <%-include('layouts/navbar');-%>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/assets/img/contact-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Create New Post</h1>
+                            <span class="subheading">Write Amazing Blogs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>A blog (a shortened version of “weblog”) is an online journal or informational website displaying information.</p>
+                        <div class="my-5">
+                            
+                            <form action="/posts/store" method="post" enctype="multipart/form-data">
+                                <div class="form-floating">
+                                    <input class="form-control" id="title" type="text" placeholder="Title..." name="title"/>
+                                    <label for="title">Title</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="subtitle" type="text" placeholder="Subtitle..." name="subtitle"/>
+                                    <label for="subtitle">Subtitle</label>
+                                </div>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="description" placeholder="Description..." style="height: 12rem" name="body"></textarea>
+                                    <label for="description">Description</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="author" type="text" placeholder="Author..." name="author"/>
+                                    <label for="author">Author</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" type="file" name="image" id="image" >
+                                    <label for="image">Image</label>
+                                </div>
+                                <br />
+                                <!-- Submit Button-->
+                                <button class="btn btn-primary" id="submitButton" type="submit">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Footer-->
+        <%-include('layouts/footer');-%>
+        <!-- JS-->
+        <%-include('layouts/scripts');-%>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
