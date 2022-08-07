@@ -9,11 +9,19 @@ const fileUpload = require('express-fileupload')
 
 mongoose.connect('mongodb://localhost:27017/Blogger',{useNewUrlParser:true})
 
+const validateMiddleWare = (req, res, next)=>{
+    if(req.files == null || req.body.title == '' || req.body.body == ''){
+        return res.redirect('/posts/new')
+    }
+    next()
+}
+
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(fileUpload())
+app.use('/posts/store', validateMiddleWare)
 
 app.get('/', async (req, res)=>{
     // res.sendFile(path.resolve(__dirname, 'pages/index.html'))
