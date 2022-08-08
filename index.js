@@ -9,6 +9,10 @@ const homeController = require('./controllers/home')
 const storePostController = require('./controllers/storePost')
 const getPostController = require('./controllers/getPost')
 const validateMiddleWare = require('./middleware/validationMiddleware')
+const newUserController = require('./controllers/newUser')
+const storeUserController = require('./controllers/storeUser')
+const loginController = require('./controllers/login')
+const loginUserController = require('./controllers/loginUser')
 
 mongoose.connect('mongodb://localhost:27017/Blogger',{useNewUrlParser:true})
 
@@ -21,6 +25,14 @@ app.use(fileUpload())
 app.use('/posts/store', validateMiddleWare)
 
 app.get('/', homeController)
+
+app.get('/auth/register', newUserController)
+
+app.get('/auth/login', loginController)
+
+app.post('/users/register', storeUserController)
+
+app.post('/users/login', loginUserController)
 
 app.get('/post/:id', getPostController)
 
