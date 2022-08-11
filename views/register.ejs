@@ -24,22 +24,28 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <p>A blog (a shortened version of “weblog”) is an online journal or informational website displaying information.</p>
                         <div class="my-5">
-                            
+                            <% if(errors != null && errors.length > 0) { %>
+                                <ul class="list-group">
+                                <% for(var i = 0; i < errors.length; i++){ %>
+                                    <li class="list-group-item list-group-item-danger"><%=errors[i] %></li>
+                                    <% } %>
+                                </ul>
+                                <% } %>
                             <form action="/users/register" method="post">
                                 <div class="form-floating">
-                                    <input class="form-control" id="username" type="text" placeholder="User Name..." name="username"/>
+                                    <input class="form-control" id="username" type="text" placeholder="User Name..." name="username" value="<%=username %>"/>
                                     <label for="username">User Name</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input class="form-control" id="password" type="password" placeholder="Password..." name="password"/>
+                                    <input class="form-control" id="password" type="password" placeholder="Password..." name="password" value="<%=password %>"/>
                                     <label for="password">Password</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input class="form-control" id="email" type="email" placeholder="Email..." name="email"/>
+                                    <input class="form-control" id="email" type="email" placeholder="Email..." name="email" value="<%=email %>"/>
                                     <label for="email">Email</label>
                                 </div>
                                 <div class="form-floating">
-                                    <input class="form-control" type="text" name="number" placeholder="Mobile-Number..." id="number" >
+                                    <input class="form-control" type="text" name="number" placeholder="Mobile-Number..." id="number" value="<%=number %>">
                                     <label for="number">Mobile-Number</label>
                                 </div>
                                 <br />

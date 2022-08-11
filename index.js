@@ -17,6 +17,7 @@ const expressSession = require('express-session')
 const authMiddleware = require('./middleware/authMiddleware')
 const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware')
 const logoutController = require('./controllers/logout')
+const flash = require('connect-flash')
 
 
 mongoose.connect('mongodb://localhost:27017/Blogger',{useNewUrlParser:true})
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.use(expressSession({
     secret: 'dhruv'
 }))
+app.use(flash())
 global.loggedIn = null
 
 app.use('*', (req, res, next)=>{
