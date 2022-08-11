@@ -13,6 +13,11 @@ const newUserController = require('./controllers/newUser')
 const storeUserController = require('./controllers/storeUser')
 const loginController = require('./controllers/login')
 const loginUserController = require('./controllers/loginUser')
+const expressSession = require('express-session')
+const authMiddleware = require('./middleware/authMiddleware')
+const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware')
+const logoutController = require('./controllers/logout')
+
 
 mongoose.connect('mongodb://localhost:27017/Blogger',{useNewUrlParser:true})
 
@@ -21,24 +26,39 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(expressSession({
+    secret: 'dhruv'
+}))
+global.loggedIn = null
+
+app.use('*', (req, res, next)=>{
+    loggedIn = req.session.userId
+    next()
+})
 app.use(fileUpload())
 app.use('/posts/store', validateMiddleWare)
 
 app.get('/', homeController)
 
-app.get('/auth/register', newUserController)
+app.get('/auth/register', redirectIfAuthenticatedMiddleware ,newUserController)
 
-app.get('/auth/login', loginController)
+app.get('/auth/login', redirectIfAuthenticatedMiddleware ,loginController)
 
-app.post('/users/register', storeUserController)
+app.post('/users/register', redirectIfAuthenticatedMiddleware ,storeUserController)
 
-app.post('/users/login', loginUserController)
+app.post('/users/login', redirectIfAuthenticatedMiddleware ,loginUserController)
+
+app.get('/auth/logout', logoutController)
 
 app.get('/post/:id', getPostController)
 
-app.get('/posts/new', newPostController)
+app.get('/posts/new', authMiddleware ,newPostController)
 
-app.post('/posts/store', storePostController)
+app.post('/posts/store', authMiddleware ,storePostController)
+
+app.use((req, res)=>{
+    res.render('notfound')
+})
 
 app.listen(4000 , ()=>{
     console.log('App listening on http://localhost:4000')
