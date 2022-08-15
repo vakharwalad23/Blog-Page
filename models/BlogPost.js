@@ -5,7 +5,12 @@ const BlogPostSchema = new Schema({
     title: String,
     subtitle: String,
     body: String,
-    author: String,
+    // author: String,
+    userid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     date: {
         type: Date,
         default: new Date()

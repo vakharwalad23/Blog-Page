@@ -6,6 +6,11 @@
         <%-include('layouts/navbar');-%>
         <!-- Page Header-->
         <header class="masthead" style="background-image: url('/assets/img/about-bg.jpg')">
+            <style>
+                .box{
+                    margin-top: 10px;
+                }
+            </style>
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -34,14 +39,20 @@
                                     <input class="form-control" id="subtitle" type="text" placeholder="Subtitle..." name="subtitle"/>
                                     <label for="subtitle">Subtitle</label>
                                 </div>
-                                <div class="form-floating">
-                                    <textarea class="form-control" id="body" placeholder="Description..." style="height: 12rem" name="body"></textarea>
-                                    <label for="body">Description</label>
+                                <div class="form-floating box">
+                                    <textarea class="summernote" id="body" placeholder="Description..." name="body"></textarea>
+                                    <script>
+                                        $('#body').summernote({
+                                            placeholder: 'Description...',
+                                            tabsize: 2,
+                                            height: 200
+                                        })
+                                    </script>
                                 </div>
-                                <div class="form-floating">
+                                <!-- <div class="form-floating">
                                     <input class="form-control" id="author" type="text" placeholder="Author..." name="author"/>
                                     <label for="author">Author</label>
-                                </div>
+                                </div> -->
                                 <div class="form-floating">
                                     <input class="form-control" type="file" name="image" id="image" >
                                     <label for="image">Image</label>
